@@ -15,14 +15,6 @@ library(gmm)
 library(dyn)
 library(urca)
 
-# Simulasi Stambaugh bias pada small sample
-nstam <- 100
-phistam <- 0.95
-vstam <- as.timeSeries(1+ phistam*rnorm(n) + rnorm(n))
-
-stam_bias <- dyn$lm(vstam ~ lag(vstam, -1))
-summary(stam_bias)
-
 # Load Data
 
 strPath       <- "Indoclean.csv"
@@ -329,8 +321,8 @@ run_MCS <- function(nrMCS = 50000, ...) {
 # run a monte, well I only do 50000 to show it works
 
 
-# nrMCS <- 50000;   phi <- phi; rho <- rho
-# reg_coef <- run_MCS(nrMCS = nrMCS, phi=phi, rho=rho, nrT = nrow(dp) , vec_sd = vec_sd)
+nrMCS <- 50000;   phi <- phi; rho <- rho
+reg_coef <- run_MCS(nrMCS = nrMCS, phi=phi, rho=rho, nrT = nrow(dp) , vec_sd = vec_sd)
 
 br_sim <- sum(reg_coef$Coef_ret > br )/nrMCS*100
 
